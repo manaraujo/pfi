@@ -2,8 +2,8 @@ package salsa20Test;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import salsa20.salsa20.Salsa20;
-import salsa20.salsa20.Utils;
+import algoritms.salsa20.Salsa20;
+import utils.Utils;
 
 import java.io.*;
 
@@ -232,14 +232,14 @@ public class UnitTest {
     }
 
     @Test
-    public void encryptionTest() throws IOException {
+    public void encryptionBytesMessageTest() throws IOException {
         Salsa20 salsa20 = new Salsa20();
         int[] k = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
         int[] n = {101, 102, 103, 104, 105, 106, 107, 108};
         int[] message = new int[512];
 
-        int[] crypt = salsa20.salsa20Encryption(k, n, message, 0);
-        crypt = salsa20.salsa20Encryption(k, n, crypt, 0);
+        int[] crypt = salsa20.execute(k, n, message, 0);
+        crypt = salsa20.execute(k, n, crypt, 0);
         Assertions.assertArrayEquals(message, crypt);
 
         Utils.logEncryptionProcess("encryptMessage", message, k, n, 0);
@@ -252,8 +252,8 @@ public class UnitTest {
         int[] n = {101, 102, 103, 104, 105, 106, 107, 108};
         int[] message = new int[512];
 
-        int[] crypt = salsa20.salsa20Encryption(k, n, message, 128);
-        crypt = salsa20.salsa20Encryption(k, n, crypt, 128);
+        int[] crypt = salsa20.execute(k, n, message, 128);
+        crypt = salsa20.execute(k, n, crypt, 128);
         Assertions.assertArrayEquals(message, crypt);
 
         Utils.logEncryptionProcess("encryptMessageOnBlockBoundary", message, k, n, 0);
@@ -266,8 +266,8 @@ public class UnitTest {
         int[] n = {101, 102, 103, 104, 105, 106, 107, 108};
         int[] message = new int[512];
 
-        int[] crypt = salsa20.salsa20Encryption(k, n, message, 246);
-        crypt = salsa20.salsa20Encryption(k, n, crypt, 246);
+        int[] crypt = salsa20.execute(k, n, message, 246);
+        crypt = salsa20.execute(k, n, crypt, 246);
         Assertions.assertArrayEquals(message, crypt);
 
         Utils.logEncryptionProcess("encryptMessageNotOnBlockBoundary", message, k, n, 0);
@@ -280,8 +280,8 @@ public class UnitTest {
         int[] n = {101, 102, 103, 104, 105, 106, 107, 108};
         int[] message = Utils.getImageArray("src/test/resources/imageInput", "bmp");
 
-        int[] crypt = salsa20.salsa20Encryption(k, n, message, 0);
-        crypt = salsa20.salsa20Encryption(k, n, crypt, 0);
+        int[] crypt = salsa20.execute(k, n, message, 0);
+        crypt = salsa20.execute(k, n, crypt, 0);
         Assertions.assertArrayEquals(message, crypt);
 
         Utils.arrayToImage(Utils.intToByte(crypt), "imageOutput", "bmp");

@@ -3,8 +3,8 @@ package salsa20Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import salsa20.salsa20.Salsa20;
-import salsa20.salsa20.Utils;
+import algoritms.salsa20.Salsa20;
+import utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,16 +63,16 @@ public class VectorTest {
             streamXor = Utils.toPrimitive(data.get(6));
             streamIndex = Utils.toPrimitive(data.get(7));
 
-            crypt = salsa20.salsa20Encryption(key, nonce, message, streamIndex[0] - 0);
+            crypt = salsa20.execute(key, nonce, message, streamIndex[0] - 0);
             Assertions.assertArrayEquals(stream0, Arrays.copyOfRange(crypt, 0, 64));
 
-            crypt = salsa20.salsa20Encryption(key, nonce, message, streamIndex[1] - 192);
+            crypt = salsa20.execute(key, nonce, message, streamIndex[1] - 192);
             Assertions.assertArrayEquals(stream1, Arrays.copyOfRange(crypt, 192, 256));
 
-            crypt = salsa20.salsa20Encryption(key, nonce, message, streamIndex[2]- 256);
+            crypt = salsa20.execute(key, nonce, message, streamIndex[2]- 256);
             Assertions.assertArrayEquals(stream2, Arrays.copyOfRange(crypt, 256, 320));
 
-            crypt = salsa20.salsa20Encryption(key, nonce, message, streamIndex[3] - 448);
+            crypt = salsa20.execute(key, nonce, message, streamIndex[3] - 448);
             Assertions.assertArrayEquals(stream3, Arrays.copyOfRange(crypt, 448, 512));
         }
     }
