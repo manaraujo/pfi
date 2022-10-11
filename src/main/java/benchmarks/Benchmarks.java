@@ -4,12 +4,8 @@ import algoritms.rabbit.Rabbit;
 import algoritms.salsa20.Salsa20;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Warmup;
+
+import org.openjdk.jmh.annotations.*;
 import utils.Utils;
 
 public class Benchmarks {
@@ -17,38 +13,16 @@ public class Benchmarks {
   private static final String inputImagePath = "src/test/resources/imageInput";
   private static final String extension = "bmp";
 
-  @Warmup(iterations = 1, time = 1)
-  @Measurement(iterations = 1, time = 1)
-  @BenchmarkMode(Mode.AverageTime)
-  @OutputTimeUnit(TimeUnit.NANOSECONDS)
   @Benchmark
-  public void execute1() throws IOException {
+  public void rabbitImage() throws IOException {
     Rabbit rabbitCipher = new Rabbit();
     int[] message = Utils.getImageArray(inputImagePath, extension);
     String key = "secret key 12345";
     String iv = "iv 12345";
     rabbitCipher.execute(Utils.intToByte(message), key.getBytes(), iv.getBytes());
   }
-
-  @Warmup(iterations = 1, time = 1)
-  @Measurement(iterations = 1, time = 1)
-  @BenchmarkMode(Mode.AverageTime)
-  @OutputTimeUnit(TimeUnit.NANOSECONDS)
   @Benchmark
-  public void execute2() throws IOException {
-    Salsa20 salsa20 = new Salsa20();
-    int[] message = Utils.getImageArray(inputImagePath, extension);
-    int[] k = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
-    int[] n = {101, 102, 103, 104, 105, 106, 107, 108};
-    salsa20.execute(k, n, message, 0);
-  }
-
-  @Warmup(iterations = 1, time = 1)
-  @Measurement(iterations = 1, time = 1)
-  @BenchmarkMode(Mode.AverageTime)
-  @OutputTimeUnit(TimeUnit.NANOSECONDS)
-  @Benchmark
-  public void execute3() {
+  public void rabbitText() {
     Rabbit rabbitCipher = new Rabbit();
     String message = "La temperatura actual de la cámara frigorífica es de -2°C";
     String key = "secret key 12345";
@@ -56,12 +30,17 @@ public class Benchmarks {
     rabbitCipher.execute(message.getBytes(), key.getBytes(), iv.getBytes());
   }
 
-  @Warmup(iterations = 1, time = 1)
-  @Measurement(iterations = 1, time = 1)
-  @BenchmarkMode(Mode.AverageTime)
-  @OutputTimeUnit(TimeUnit.NANOSECONDS)
   @Benchmark
-  public void execute4() {
+  public void salsa20Image() throws IOException {
+    Salsa20 salsa20 = new Salsa20();
+    int[] message = Utils.getImageArray(inputImagePath, extension);
+    int[] k = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+    int[] n = {101, 102, 103, 104, 105, 106, 107, 108};
+    salsa20.execute(k, n, message, 0);
+  }
+
+  @Benchmark
+  public void salsa20Text() {
     Salsa20 salsa20 = new Salsa20();
     int[] k = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
     int[] n = {101, 102, 103, 104, 105, 106, 107, 108};
