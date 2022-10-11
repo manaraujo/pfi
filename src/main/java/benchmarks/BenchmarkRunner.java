@@ -26,7 +26,7 @@ public class BenchmarkRunner {
             .measurementIterations(1)
             .measurementTime(TimeValue.seconds(5))
 
-            .addProfiler(GCProfiler.class)
+//            .addProfiler(GCProfiler.class)
 //            .shouldDoGC(true)
             .build();
 
