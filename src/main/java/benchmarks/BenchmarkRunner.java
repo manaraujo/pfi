@@ -2,6 +2,7 @@ package benchmarks;
 
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.profile.GCProfiler;
 import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
@@ -13,12 +14,13 @@ public class BenchmarkRunner {
         Options opt = new OptionsBuilder()
             .include(Benchmarks.class.getSimpleName())
             .resultFormat(ResultFormatType.CSV)
-            .mode(Mode.AverageTime)
+            .mode(Mode.All)
             .timeUnit(TimeUnit.NANOSECONDS)
             .forks(1)
             .warmupIterations(0)
             .measurementIterations(1)
             .measurementTime(TimeValue.seconds(5))
+            .addProfiler(GCProfiler.class)
             .build();
         new Runner(opt).run();
     }
