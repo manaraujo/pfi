@@ -9,9 +9,6 @@ public class ImageEncryptionWithRabbit {
 
     private static final ImageClient client = new ImageClient("Cipher Demonstration", 0, 0);
 
-    private static final int[] k = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
-    private static final int[] n = {101, 102, 103, 104, 105, 106, 107, 108};
-
     private static final String inputImagePath = "src/test/resources/imageInput";
     private static final String outputImagePath = "src/test/resources/image";
     private static final String outputEncryptedImageImagePath = "src/test/resources/encryptedImage";
@@ -26,8 +23,8 @@ public class ImageEncryptionWithRabbit {
     private static void cryptImage() throws IOException {
         int[] message = Utils.getImageArray(inputImagePath, extension);
 
-        byte[] key = "secret key 12345".getBytes();	    //16 bytes
-        byte[] iv = "iv 12345".getBytes();				      //8 bytes
+        byte[] key = "secret key 12345".getBytes();
+        byte[] iv = "iv 12345".getBytes();
 
         Rabbit rabbit = new Rabbit();
 

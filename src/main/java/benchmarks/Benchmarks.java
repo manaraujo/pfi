@@ -3,7 +3,6 @@ package benchmarks;
 import algoritms.rabbit.Rabbit;
 import algoritms.salsa20.Salsa20;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import org.openjdk.jmh.annotations.*;
 import utils.Utils;
@@ -13,7 +12,7 @@ public class Benchmarks {
   private static final String inputImagePath = "src/test/resources/imageInput";
   private static final String extension = "bmp";
 
-//  @Benchmark
+  @Benchmark
   public void rabbitImage() throws IOException {
     Rabbit rabbitCipher = new Rabbit();
     int[] message = Utils.getImageArray(inputImagePath, extension);
@@ -21,6 +20,7 @@ public class Benchmarks {
     String iv = "iv 12345";
     rabbitCipher.execute(Utils.intToByte(message), key.getBytes(), iv.getBytes());
   }
+
   @Benchmark
   public void rabbitText() {
     Rabbit rabbitCipher = new Rabbit();
@@ -30,7 +30,7 @@ public class Benchmarks {
     rabbitCipher.execute(message.getBytes(), key.getBytes(), iv.getBytes());
   }
 
-//  @Benchmark
+  @Benchmark
   public void salsa20Image() throws IOException {
     Salsa20 salsa20 = new Salsa20();
     int[] message = Utils.getImageArray(inputImagePath, extension);

@@ -12,8 +12,8 @@ public class MessageEncryptionWithRabbit {
 	public static void encryptionMessageDemonstration() {
 		System.out.println("Iniciando demostración de encriptación de mensaje..");
 		Rabbit rabbit = new Rabbit();
-		String key = "secret key 12345";	//16 bytes
-		String iv = "iv 12345";						//8 bytes
+		String key = "secret key 12345";
+		String iv = "iv 12345";
 		String message = "La temperatura actual de la cámara frigorífica es de -2°C";
 
 		System.out.printf("\n mensaje a encriptar: %s\n", message);

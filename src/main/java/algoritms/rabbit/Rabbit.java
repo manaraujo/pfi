@@ -3,7 +3,6 @@ package algoritms.rabbit;
 import java.util.Arrays;
 import utils.Utils;
 
-
 public class Rabbit {
 	private static final int KEYSTREAM_LENGTH = 16;
 	private static final int[] A = new int[] { 0x4D34D34D, 0xD34D34D3, 0x34D34D34, 0x4D34D34D, 0xD34D34D3, 0x34D34D34, 0x4D34D34D,
